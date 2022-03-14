@@ -75,10 +75,7 @@ const getAllBooksHandler = (request, h) => {
   let booksFiltered;
   if (request.query.name) {
     const key = request.query.name.toLowerCase();
-    booksFiltered = books.filter((book) => book.name.toLowerCase().includes(key)).map((item) => {
-      const { id, name, publisher } = item;
-      return { id, name, publisher };
-    });
+    booksFiltered = books.filter((book) => book.name.toLowerCase().includes(key));
   }
   if (request.query.reading) {
     const readingStatus = request.query.reading === '1';
