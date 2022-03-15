@@ -71,6 +71,11 @@ const addBookHandler = (request, h) => {
   return response;
 };
 
+const selectSomeProp = (book) => {
+  const { id, name, publisher } = book;
+  return { id, name, publisher };
+};
+
 const getAllBooksHandler = (request, h) => {
   let booksFiltered;
   if (request.query.name) {
@@ -87,15 +92,9 @@ const getAllBooksHandler = (request, h) => {
   }
 
   if (booksFiltered === undefined) {
-    booksFiltered = books.map((item) => {
-      const { id, name, publisher } = item;
-      return { id, name, publisher };
-    });
+    booksFiltered = books.map(selectSomeProp);
   } else {
-    booksFiltered = booksFiltered.map((item) => {
-      const { id, name, publisher } = item;
-      return { id, name, publisher };
-    });
+    booksFiltered = booksFiltered.map(selectSomeProp);
   }
 
   const response = h.response({
